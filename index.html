@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEYRiX | Continuous Infrastructure</title>
+    <meta name="description" content="VEYRiX engineers automated delivery systems, cloud infrastructure and secure operations that keep modern software moving.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS (CDN for v3) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#07090D',
+                        'acid-lime': '#C7F36B',
+                        platinum: '#D9DEE7',
+                        charcoal: '#1F2937'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-obsidian text-platinum font-inter antialiased overflow-x-hidden selection:bg-acid-lime selection:text-obsidian transition-colors duration-300">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <!-- Custom Geometric Logo -->
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 2L30 9V23L16 30L2 23V9L16 2Z" stroke="#C7F36B" stroke-width="2"/>
+                    <path d="M16 16L30 9M16 16L2 9M16 16V30" stroke="#C7F36B" stroke-width="2"/>
+                    <circle cx="16" cy="16" r="3" fill="#D9DEE7"/>
+                </svg>
+                <span class="font-space font-bold text-2xl tracking-wider text-platinum logo-text">VEYRiX</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-platinum/80 nav-links">
+                <a href="#home" class="nav-item hover:text-acid-lime transition-colors">Home</a>
+                <a href="#platform" class="nav-item hover:text-acid-lime transition-colors">Platform</a>
+                <a href="#solutions" class="nav-item hover:text-acid-lime transition-colors">Solutions</a>
+                <a href="#infrastructure" class="nav-item hover:text-acid-lime transition-colors">Infrastructure</a>
+                <a href="#security" class="nav-item hover:text-acid-lime transition-colors">Security</a>
+                <a href="#observability" class="nav-item hover:text-acid-lime transition-colors">Observability</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6">
+                <button id="themeToggle" class="text-platinum hover:text-acid-lime transition-colors" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark-icon"></i>
+                    <i data-lucide="moon" class="w-5 h-5 light-icon"></i>
+                </button>
+                <a href="#contact" class="bg-acid-lime text-obsidian px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-white transition-all transform hover:scale-105">
+                    Talk to an Engineer
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-platinum" id="mobileMenuBtn">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-obsidian/95 backdrop-blur-xl border-b border-platinum/10 p-6 flex-col gap-6">
+            <a href="#home" class="nav-item text-platinum hover:text-acid-lime font-medium">Home</a>
+            <a href="#platform" class="nav-item text-platinum hover:text-acid-lime font-medium">Platform</a>
+            <a href="#solutions" class="nav-item text-platinum hover:text-acid-lime font-medium">Solutions</a>
+            <a href="#infrastructure" class="nav-item text-platinum hover:text-acid-lime font-medium">Infrastructure</a>
+            <a href="#security" class="nav-item text-platinum hover:text-acid-lime font-medium">Security</a>
+            <a href="#observability" class="nav-item text-platinum hover:text-acid-lime font-medium">Observability</a>
+            <button id="themeToggleMobile" class="text-platinum hover:text-acid-lime font-medium flex items-center gap-2">
+                Toggle Theme
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+        <!-- Background Network Pattern -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none" id="networkCanvas"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full grid lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-acid-lime animate-pulse"></span>
+                    <span class="text-xs font-space tracking-[0.2em] text-platinum/70 uppercase">Engineered for Continuous Delivery</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-space font-bold leading-tight mb-8">
+                    Ship Faster.<br>
+                    <span class="text-platinum/50">Scale Smarter.</span><br>
+                    <span class="text-acid-lime">Stay Resilient.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-platinum/70 font-light max-w-xl mb-10 leading-relaxed">
+                    VEYRiX engineers automated delivery systems, cloud infrastructure and secure operations that keep modern software moving.
+                </p>
+                <div class="flex flex-wrap items-center gap-6">
+                    <a href="#build" class="bg-acid-lime text-obsidian px-8 py-4 rounded-full font-semibold hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(199,243,107,0.3)]">
+                        Build Your Pipeline
+                    </a>
+                    <a href="#platform" class="group flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-platinum/20 text-platinum hover:border-acid-lime hover:text-acid-lime transition-all font-semibold">
+                        Explore VEYRiX 
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <div class="mt-12 flex items-center gap-3 py-3 px-5 rounded-full border border-platinum/10 bg-platinum/5 w-max backdrop-blur-sm">
+                    <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></div>
+                    <span class="text-xs font-mono text-platinum/80 uppercase tracking-wider">Global Systems Operational</span>
+                </div>
+            </div>
+
+            <!-- Hero Visual: The Continuous Pipeline -->
+            <div class="relative h-[300px] lg:h-[450px] w-full lg:w-[85%] mx-auto flex items-center justify-center" data-aos="fade-left" data-aos-duration="1200">
+                <!-- Abstract 3D Render Placeholder / Actual Image could go here, but doing interactive UI -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-obsidian via-obsidian/60 to-transparent z-10 rounded-2xl pointer-events-none"></div>
+                <img src="./images/server_infrastructure_1788934085935.jpg" alt="Server Infrastructure" class="absolute inset-0 w-full h-full object-contain rounded-2xl opacity-90">
+                
+                <!-- Interactive Nodes overlay -->
+                <div class="relative z-20 w-full max-w-md flex flex-col gap-6 pipeline-visual">
+                    <div class="pipeline-node group">
+                        <div class="node-icon"><i data-lucide="git-commit"></i></div>
+                        <div class="node-info">COMMIT</div>
+                        <div class="node-status hidden group-hover:block">Code pushed to main</div>
+                    </div>
+                    <div class="h-8 w-px bg-platinum/20 mx-auto relative glow-line"></div>
+                    <div class="pipeline-node group">
+                        <div class="node-icon"><i data-lucide="package"></i></div>
+                        <div class="node-info">BUILD</div>
+                        <div class="node-status hidden group-hover:block">Compiling assets...</div>
+                    </div>
+                    <div class="h-8 w-px bg-platinum/20 mx-auto relative glow-line"></div>
+                    <div class="pipeline-node group">
+                        <div class="node-icon"><i data-lucide="check-circle"></i></div>
+                        <div class="node-info">TEST</div>
+                        <div class="node-status hidden group-hover:block">1,284 Tests Passed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Bar -->
+    <section class="border-y border-platinum/10 bg-obsidian/50 backdrop-blur-xl relative z-20 py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-platinum/10">
+                <div class="px-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl font-space font-bold text-platinum mb-2"><span class="counter" data-target="99.99">0</span>%</div>
+                    <div class="text-xs text-platinum/50 uppercase tracking-widest font-medium">Deployment Reliability</div>
+                </div>
+                <div class="px-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl font-space font-bold text-acid-lime mb-2"><span class="counter" data-target="4.8">0</span>×</div>
+                    <div class="text-xs text-platinum/50 uppercase tracking-widest font-medium">Faster Release Cycles</div>
+                </div>
+                <div class="px-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl font-space font-bold text-platinum mb-2"><span class="counter" data-target="72">0</span>%</div>
+                    <div class="text-xs text-platinum/50 uppercase tracking-widest font-medium">Less Manual Operations</div>
+                </div>
+                <div class="px-6 text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl font-space font-bold text-platinum mb-2"><span class="counter" data-target="08">0</span>m</div>
+                    <div class="text-xs text-platinum/50 uppercase tracking-widest font-medium">Mean Recovery Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section id="platform" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-space font-bold mb-6">One Infrastructure Layer.<br>Every Stage of Delivery.</h2>
+                <p class="text-platinum/70 text-lg">From the first commit to production observability, VEYRiX connects engineering workflows into one automated delivery system.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-panel p-8 rounded-2xl group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-gradient-to-br from-acid-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <img src="./images/ci_cd_engine_1788937167206.jpg" alt="CI/CD Engine" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md border border-platinum/10 group-hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-space font-bold mb-3 tracking-wide">CI/CD ENGINE</h3>
+                    <p class="text-platinum/60 text-sm leading-relaxed">Automate build, test and deployment workflows across every environment.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-panel p-8 rounded-2xl group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute inset-0 bg-gradient-to-br from-acid-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <img src="./images/iac_platform_1788937185323.jpg" alt="Infrastructure As Code" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md border border-platinum/10 group-hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-space font-bold mb-3 tracking-wide">INFRASTRUCTURE AS CODE</h3>
+                    <p class="text-platinum/60 text-sm leading-relaxed">Provision consistent infrastructure through version-controlled automation.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-panel p-8 rounded-2xl group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute inset-0 bg-gradient-to-br from-acid-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <img src="./images/container_platform_1788937201496.jpg" alt="Container Platform" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md border border-platinum/10 group-hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-space font-bold mb-3 tracking-wide">CONTAINER PLATFORM</h3>
+                    <p class="text-platinum/60 text-sm leading-relaxed">Build, ship and scale containerized applications effortlessly.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-panel p-8 rounded-2xl group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                    <div class="absolute inset-0 bg-gradient-to-br from-acid-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <img src="./images/k8s_operations_1788937215058.jpg" alt="Kubernetes Operations" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md border border-platinum/10 group-hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-space font-bold mb-3 tracking-wide">KUBERNETES OPERATIONS</h3>
+                    <p class="text-platinum/60 text-sm leading-relaxed">Manage resilient workloads with intelligent orchestration.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="glass-panel p-8 rounded-2xl group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-acid-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <img src="./images/devsecops_1788937227468.jpg" alt="DevSecOps" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md border border-platinum/10 group-hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-space font-bold mb-3 tracking-wide">DEVSECOPS</h3>
+                    <p class="text-platinum/60 text-sm leading-relaxed">Embed security checks and policy enforcement directly into delivery pipelines.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="glass-panel p-8 rounded-2xl group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden" data-aos="fade-up" data-aos-delay="600">
+                    <div class="absolute inset-0 bg-gradient-to-br from-acid-lime/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <img src="./images/observability_1788937239976.jpg" alt="Observability" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md border border-platinum/10 group-hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-space font-bold mb-3 tracking-wide">OBSERVABILITY</h3>
+                    <p class="text-platinum/60 text-sm leading-relaxed">Monitor applications, infrastructure and deployments from one intelligent layer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CI/CD Pipeline Experience -->
+    <section id="solutions" class="py-24 bg-obsidian/30 border-y border-platinum/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-space font-bold mb-6">From Commit to Production.<br><span class="text-platinum/50">Without the Friction.</span></h2>
+            </div>
+
+            <!-- Pipeline Interface -->
+            <div class="glass-panel rounded-2xl p-6 md:p-10 border border-platinum/10 overflow-x-auto custom-scrollbar" data-aos="zoom-in">
+                <div class="min-w-[800px]">
+                    <div class="flex justify-between items-start mb-12 relative">
+                        <!-- Connecting Line -->
+                        <div class="absolute top-6 left-10 right-10 h-0.5 bg-platinum/10 -z-10">
+                            <div class="h-full bg-acid-lime w-[85%] relative">
+                                <div class="absolute top-1/2 right-0 w-2 h-2 rounded-full bg-acid-lime transform -translate-y-1/2 shadow-[0_0_10px_#C7F36B]"></div>
+                            </div>
+                        </div>
+
+                        <!-- Stages -->
+                        <div class="text-center group">
+                            <div class="w-12 h-12 rounded-full bg-acid-lime text-obsidian flex items-center justify-center mx-auto mb-4 font-bold shadow-[0_0_15px_rgba(199,243,107,0.3)]"><i data-lucide="code-2" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-platinum/50 mb-1">01</div>
+                            <div class="text-sm font-space font-bold tracking-wider">CODE</div>
+                        </div>
+                        <div class="text-center group">
+                            <div class="w-12 h-12 rounded-full bg-acid-lime text-obsidian flex items-center justify-center mx-auto mb-4 font-bold shadow-[0_0_15px_rgba(199,243,107,0.3)]"><i data-lucide="blocks" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-platinum/50 mb-1">02</div>
+                            <div class="text-sm font-space font-bold tracking-wider">BUILD</div>
+                        </div>
+                        <div class="text-center group">
+                            <div class="w-12 h-12 rounded-full bg-acid-lime text-obsidian flex items-center justify-center mx-auto mb-4 font-bold shadow-[0_0_15px_rgba(199,243,107,0.3)]"><i data-lucide="test-tube" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-platinum/50 mb-1">03</div>
+                            <div class="text-sm font-space font-bold tracking-wider">TEST</div>
+                        </div>
+                        <div class="text-center group">
+                            <div class="w-12 h-12 rounded-full bg-acid-lime text-obsidian flex items-center justify-center mx-auto mb-4 font-bold shadow-[0_0_15px_rgba(199,243,107,0.3)]"><i data-lucide="shield" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-platinum/50 mb-1">04</div>
+                            <div class="text-sm font-space font-bold tracking-wider">SCAN</div>
+                        </div>
+                        <div class="text-center group">
+                            <div class="w-12 h-12 rounded-full bg-acid-lime text-obsidian flex items-center justify-center mx-auto mb-4 font-bold shadow-[0_0_15px_rgba(199,243,107,0.3)]"><i data-lucide="package" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-platinum/50 mb-1">05</div>
+                            <div class="text-sm font-space font-bold tracking-wider">PACKAGE</div>
+                        </div>
+                        <div class="text-center group">
+                            <div class="w-12 h-12 rounded-full bg-obsidian border-2 border-acid-lime text-acid-lime flex items-center justify-center mx-auto mb-4 font-bold relative animate-pulse"><i data-lucide="rocket" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-acid-lime mb-1">06</div>
+                            <div class="text-sm font-space font-bold tracking-wider text-acid-lime">DEPLOY</div>
+                        </div>
+                        <div class="text-center group opacity-50">
+                            <div class="w-12 h-12 rounded-full bg-obsidian border-2 border-platinum/20 text-platinum/50 flex items-center justify-center mx-auto mb-4 font-bold"><i data-lucide="bar-chart" class="w-5 h-5"></i></div>
+                            <div class="text-xs font-mono text-platinum/30 mb-1">07</div>
+                            <div class="text-sm font-space font-bold tracking-wider">MONITOR</div>
+                        </div>
+                    </div>
+
+                    <!-- Pipeline Details Terminal -->
+                    <div class="bg-[#0A0D14] rounded-lg border border-platinum/10 p-4 font-mono text-sm">
+                        <div class="flex items-center justify-between mb-4 pb-4 border-b border-platinum/10">
+                            <div class="flex gap-4">
+                                <div><span class="text-platinum/50">Status:</span> <span class="text-acid-lime">PASSED</span></div>
+                                <div><span class="text-platinum/50">Build:</span> #8427</div>
+                            </div>
+                            <div class="flex gap-4 text-xs">
+                                <span class="bg-platinum/5 px-2 py-1 rounded text-platinum/70">1,284 Tests</span>
+                                <span class="bg-acid-lime/10 px-2 py-1 rounded text-acid-lime">0 Critical Vulns</span>
+                                <span class="bg-platinum/5 px-2 py-1 rounded text-platinum/70">18 Containers</span>
+                            </div>
+                        </div>
+                        <div class="text-platinum/90 space-y-2 pb-2" id="terminal-output">
+                            <div class="text-acid-lime font-semibold">[INFO] Pipeline execution initialized for branch 'main'</div>
+                            <div>[INFO] Fetching repository commit 3f8a9c2... done.</div>
+                            <div>[INFO] Resolving dependencies via package manager...</div>
+                            <div class="text-acid-lime font-semibold">[SUCCESS] 1,248 packages installed in 14.2s</div>
+                            <div>[INFO] Running automated test suite...</div>
+                            <div class="text-acid-lime font-semibold">[SUCCESS] 1,284 tests passed (0 skipped, 0 failed)</div>
+                            <div>[INFO] Executing static application security testing (SAST)...</div>
+                            <div class="text-acid-lime font-semibold">[SUCCESS] 0 Critical, 0 High vulnerabilities found.</div>
+                            <div>[INFO] Building Docker container image 'veyrix-app:v2.1.4'...</div>
+                            <div class="text-acid-lime font-semibold">[SUCCESS] Image built and pushed to registry.</div>
+                            <div>[INFO] Applying Kubernetes manifests to production cluster...</div>
+                            <div class="text-acid-lime font-semibold animate-pulse">[WAITING] Awaiting health check for new deployment pods...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infrastructure as Code -->
+    <section id="infrastructure" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <span class="text-xs font-space tracking-[0.2em] text-acid-lime uppercase mb-4 block">Infrastructure as Code</span>
+                    <h2 class="text-4xl md:text-5xl font-space font-bold mb-6">Infrastructure Should Be Repeatable.</h2>
+                    <p class="text-platinum/70 text-lg mb-8 leading-relaxed">
+                        Define infrastructure as code, version every change and reproduce environments with confidence. Avoid manual configuration drift and deploy with zero hesitation.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-platinum/90"><i data-lucide="check" class="text-acid-lime w-5 h-5"></i> Version Controlled</li>
+                        <li class="flex items-center gap-3 text-platinum/90"><i data-lucide="check" class="text-acid-lime w-5 h-5"></i> Repeatable Environments</li>
+                        <li class="flex items-center gap-3 text-platinum/90"><i data-lucide="check" class="text-acid-lime w-5 h-5"></i> Fully Automated</li>
+                        <li class="flex items-center gap-3 text-platinum/90"><i data-lucide="check" class="text-acid-lime w-5 h-5"></i> Auditable Changes</li>
+                        <li class="flex items-center gap-3 text-platinum/90"><i data-lucide="check" class="text-acid-lime w-5 h-5"></i> Infinitely Scalable</li>
+                    </ul>
+                </div>
+                
+                <!-- Code Editor Visualization -->
+                <div class="glass-panel rounded-xl overflow-hidden border border-platinum/10 shadow-2xl relative" data-aos="fade-left">
+                    <!-- Editor Header -->
+                    <div class="bg-obsidian border-b border-platinum/10 px-4 py-3 flex items-center justify-between">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                        </div>
+                        <div class="text-xs font-mono text-platinum/50">main.tf — VEYRiX-Production</div>
+                        <div></div>
+                    </div>
+                    <!-- Editor Body -->
+                    <div class="p-6 font-mono text-sm leading-relaxed overflow-x-auto relative">
+                        <!-- Floating Tech Labels -->
+                        <div class="absolute top-4 right-4 flex flex-col gap-2 pointer-events-none">
+                            <span class="bg-[#5C4EE5]/20 text-[#5C4EE5] px-2 py-1 rounded text-[10px] border border-[#5C4EE5]/30">Terraform</span>
+                            <span class="bg-[#326CE5]/20 text-[#326CE5] px-2 py-1 rounded text-[10px] border border-[#326CE5]/30">Kubernetes</span>
+                        </div>
+
+                        <div class="flex text-platinum/30 select-none">
+                            <div class="pr-4 text-right border-r border-platinum/10 mr-4">
+                                1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11
+                            </div>
+                            <div class="text-platinum/80">
+                                <span class="text-purple-400">resource</span> <span class="text-yellow-300">"kubernetes_deployment"</span> <span class="text-green-300">"veyrix_core"</span> {<br>
+                                &nbsp;&nbsp;<span class="text-purple-400">metadata</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span> = <span class="text-green-300">"production-cluster"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">labels</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">app</span> = <span class="text-green-300">"veyrix"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">tier</span> = <span class="text-green-300">"backend"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;<span class="text-purple-400">spec</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">replicas</span> = <span class="text-orange-300">12</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Status Footer -->
+                    <div class="bg-acid-lime/10 border-t border-acid-lime/20 px-4 py-2 flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-acid-lime animate-pulse"></div>
+                        <span class="text-xs font-mono text-acid-lime tracking-wider uppercase">Apply Successful</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cloud Architecture -->
+    <section class="py-24 bg-obsidian border-y border-platinum/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-space font-bold mb-6">Built for Cloud-Native Scale.</h2>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-platinum/10" data-aos="zoom-in">
+                <img src="./images/cloud_architecture_1788934175125.jpg" alt="Cloud Architecture" class="w-full h-auto object-contain opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+                
+                <!-- Overlay Labels -->
+                <div class="absolute bottom-8 left-8 right-8 flex flex-wrap justify-center gap-4">
+                    <span class="glass-panel px-4 py-2 rounded font-mono text-xs text-platinum">AWS</span>
+                    <span class="glass-panel px-4 py-2 rounded font-mono text-xs text-platinum">Google Cloud</span>
+                    <span class="glass-panel px-4 py-2 rounded font-mono text-xs text-platinum">Azure</span>
+                    <span class="glass-panel px-4 py-2 rounded font-mono text-xs text-platinum">Kubernetes</span>
+                    <span class="glass-panel px-4 py-2 rounded font-mono text-xs text-platinum">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Observability -->
+    <section id="observability" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1" data-aos="fade-right">
+                    <!-- Dashboard Visual -->
+                    <div class="glass-panel rounded-xl p-6 border border-platinum/10">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-space font-bold text-sm tracking-wider">SYSTEM HEALTH</h3>
+                            <span class="text-acid-lime font-mono">99.98%</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-obsidian/50 p-4 rounded border border-platinum/5">
+                                <div class="text-xs text-platinum/50 mb-1">ACTIVE SERVICES</div>
+                                <div class="text-xl font-space">148</div>
+                            </div>
+                            <div class="bg-obsidian/50 p-4 rounded border border-platinum/5">
+                                <div class="text-xs text-platinum/50 mb-1">DEPLOYMENTS TODAY</div>
+                                <div class="text-xl font-space">326</div>
+                            </div>
+                            <div class="bg-obsidian/50 p-4 rounded border border-platinum/5">
+                                <div class="text-xs text-platinum/50 mb-1">ERROR RATE</div>
+                                <div class="text-xl font-space text-acid-lime">0.03%</div>
+                            </div>
+                            <div class="bg-obsidian/50 p-4 rounded border border-platinum/5">
+                                <div class="text-xs text-platinum/50 mb-1">LATENCY</div>
+                                <div class="text-xl font-space">82ms</div>
+                            </div>
+                        </div>
+
+                        <!-- Mock Chart -->
+                        <div class="h-32 w-full flex items-end gap-1 relative border-b border-l border-platinum/10 pb-1 pl-1">
+                            <!-- Generate some random bars for traffic -->
+                            <div class="w-full bg-acid-lime/20 h-[30%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/30 h-[45%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/50 h-[60%] hover:bg-acid-lime/40 transition-colors relative"><div class="absolute -top-2 left-1/2 w-1 h-1 bg-white rounded-full"></div></div>
+                            <div class="w-full bg-acid-lime/40 h-[40%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/20 h-[25%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/60 h-[70%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/80 h-[90%] hover:bg-acid-lime/40 transition-colors relative"><div class="absolute -top-2 left-1/2 w-1 h-1 bg-white rounded-full"></div></div>
+                            <div class="w-full bg-acid-lime/50 h-[55%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/30 h-[35%] hover:bg-acid-lime/40 transition-colors"></div>
+                            <div class="w-full bg-acid-lime/40 h-[45%] hover:bg-acid-lime/40 transition-colors"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-platinum/40 mt-2 font-mono">
+                            <span>00:00</span>
+                            <span>12:00</span>
+                            <span>24:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2" data-aos="fade-left">
+                    <h2 class="text-4xl md:text-5xl font-space font-bold mb-6">Know What Your Systems Are Doing.<br><span class="text-platinum/50">Before Your Users Do.</span></h2>
+                    <p class="text-platinum/70 text-lg leading-relaxed">
+                        Full-stack observability integrated directly into the infrastructure layer. Monitor deployments, trace distributed requests, and automatically detect anomalies before they impact the user experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DevSecOps & Release Engineering (Combined slightly for flow) -->
+    <section id="security" class="py-24 bg-[#05070A] border-y border-platinum/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <!-- Security -->
+                <div data-aos="fade-up">
+                    <h2 class="text-3xl font-space font-bold mb-6">Security Is Part of the Pipeline.</h2>
+                    <p class="text-platinum/60 mb-8">Shift left without slowing down. Automated vulnerability scanning and policy enforcement built directly into the CI/CD flow.</p>
+                    
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
+                            <i data-lucide="shield-check" class="text-acid-lime w-5 h-5"></i>
+                            <div class="flex-1">SAST & DAST Scanning</div>
+                            <span class="text-acid-lime">PASS</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
+                            <i data-lucide="key" class="text-acid-lime w-5 h-5"></i>
+                            <div class="flex-1">Secret Detection</div>
+                            <span class="text-acid-lime">PASS</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
+                            <i data-lucide="container" class="text-acid-lime w-5 h-5"></i>
+                            <div class="flex-1">Container Vulnerability Scan</div>
+                            <span class="text-acid-lime">0 CRITICAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="text-3xl font-space font-bold mb-6">Deploy Boldly.<br>Roll Back Instantly.</h2>
+                    <p class="text-platinum/60 mb-8">Progressive delivery mechanisms that minimize blast radius. Canary releases and blue/green deployments out of the box.</p>
+                    
+                    <div class="glass-panel p-6 rounded border border-platinum/10">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="text-xs font-mono text-platinum/50">VERSION 4.8 ROLLOUT</div>
+                            <div class="text-xs font-mono text-acid-lime">HEALTH: STABLE</div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 text-right text-xs text-platinum/70">10%</div>
+                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden"><div class="h-full bg-acid-lime w-[10%]"></div></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 text-right text-xs text-platinum/70">25%</div>
+                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden"><div class="h-full bg-acid-lime w-[25%]"></div></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 text-right text-xs text-acid-lime font-bold">50%</div>
+                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden relative">
+                                    <div class="h-full bg-acid-lime w-[50%] shadow-[0_0_10px_#C7F36B]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Principles -->
+    <section class="py-32 relative bg-obsidian">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-space font-bold mb-20 text-center" data-aos="fade-up">Systems That Never Stop Improving.</h2>
+            
+            <div class="grid md:grid-cols-2 gap-x-16 gap-y-12">
+                <div data-aos="fade-up">
+                    <div class="text-acid-lime font-mono mb-4 text-sm">01</div>
+                    <h3 class="text-2xl font-space font-bold mb-4">AUTOMATE EVERYTHING</h3>
+                    <p class="text-platinum/60">Reduce repetitive operations. If it must be done more than twice, it must be automated into the pipeline.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-acid-lime font-mono mb-4 text-sm">02</div>
+                    <h3 class="text-2xl font-space font-bold mb-4">RELIABILITY BY DESIGN</h3>
+                    <p class="text-platinum/60">Build resilience into every system. Failures are expected; graceful degradation and rapid recovery are engineered.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-acid-lime font-mono mb-4 text-sm">03</div>
+                    <h3 class="text-2xl font-space font-bold mb-4">SECURITY EVERYWHERE</h3>
+                    <p class="text-platinum/60">Protect every stage of delivery. Security is not an afterthought, it is enforced at the infrastructure level.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-acid-lime font-mono mb-4 text-sm">04</div>
+                    <h3 class="text-2xl font-space font-bold mb-4">OBSERVE EVERYTHING</h3>
+                    <p class="text-platinum/60">Turn system signals into decisions. Visibility across the entire stack is mandatory for operational excellence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 relative overflow-hidden bg-obsidian border-t border-platinum/10">
+        <!-- Abstract Animated Network Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, #C7F36B 1px, transparent 0); background-size: 40px 40px;"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center" data-aos="zoom-in">
+            <h2 class="text-5xl md:text-7xl font-space font-bold mb-8 leading-tight">
+                Your Next Deployment<br>
+                <span class="text-platinum/50">Shouldn't Be Your Biggest Risk.</span>
+            </h2>
+            <p class="text-xl text-platinum/70 mb-12">Build an infrastructure layer that moves at the speed of your engineering team.</p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#contact" class="bg-acid-lime text-obsidian px-10 py-4 rounded-full font-bold text-lg hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_30px_rgba(199,243,107,0.2)] w-full sm:w-auto">
+                    Talk to an Engineer
+                </a>
+                <a href="#demo" class="px-10 py-4 rounded-full font-bold text-lg border border-platinum/20 hover:border-acid-lime hover:text-acid-lime transition-all w-full sm:w-auto">
+                    Start Building
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-[#0A0D14] relative overflow-hidden border-t border-platinum/10">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-space font-bold mb-6">Talk to an Engineer</h2>
+                <p class="text-platinum/70 text-lg">Ready to modernize your delivery? Get in touch and let's discuss your infrastructure.</p>
+            </div>
+            
+            <form class="glass-panel p-8 md:p-12 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-platinum/80 mb-2">Full Name</label>
+                        <input type="text" id="name" class="w-full bg-obsidian/50 border border-platinum/10 rounded-lg px-4 py-3 text-platinum focus:outline-none focus:border-acid-lime transition-colors" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-platinum/80 mb-2">Work Email</label>
+                        <input type="email" id="email" class="w-full bg-obsidian/50 border border-platinum/10 rounded-lg px-4 py-3 text-platinum focus:outline-none focus:border-acid-lime transition-colors" placeholder="john@company.com">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="company" class="block text-sm font-medium text-platinum/80 mb-2">Company</label>
+                    <input type="text" id="company" class="w-full bg-obsidian/50 border border-platinum/10 rounded-lg px-4 py-3 text-platinum focus:outline-none focus:border-acid-lime transition-colors" placeholder="Your Company">
+                </div>
+                <div class="mb-8">
+                    <label for="message" class="block text-sm font-medium text-platinum/80 mb-2">How can we help?</label>
+                    <textarea id="message" rows="4" class="w-full bg-obsidian/50 border border-platinum/10 rounded-lg px-4 py-3 text-platinum focus:outline-none focus:border-acid-lime transition-colors" placeholder="Tell us about your infrastructure goals..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-acid-lime text-obsidian px-8 py-4 rounded-lg font-bold text-lg hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(199,243,107,0.2)]">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#05070A] py-16 border-t border-platinum/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-10 mb-16">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 2L30 9V23L16 30L2 23V9L16 2Z" stroke="#C7F36B" stroke-width="2"/>
+                            <path d="M16 16L30 9M16 16L2 9M16 16V30" stroke="#C7F36B" stroke-width="2"/>
+                        </svg>
+                        <span class="font-space font-bold text-xl tracking-wider text-platinum logo-text">VEYRiX</span>
+                    </div>
+                    <p class="text-platinum/50 text-sm mb-6">Ship. Scale. Stay Resilient.</p>
+                    <a href="mailto:hello@veyrix.com" class="text-acid-lime text-sm hover:underline font-mono">hello@veyrix.com</a>
+                </div>
+                
+                <div>
+                    <h4 class="font-space font-bold mb-6 text-sm">Platform</h4>
+                    <ul class="space-y-4 text-sm text-platinum/50">
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">CI/CD</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Infrastructure</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Containers</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-space font-bold mb-6 text-sm">Engineering</h4>
+                    <ul class="space-y-4 text-sm text-platinum/50">
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">DevSecOps</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Observability</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">SRE</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Release Engineering</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-space font-bold mb-6 text-sm">Company</h4>
+                    <ul class="space-y-4 text-sm text-platinum/50">
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Resources</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-space font-bold mb-6 text-sm">Connect</h4>
+                    <ul class="flex gap-5 text-platinum/50 mt-4">
+                        <li><a href="#" class="hover:text-acid-lime transition-colors block" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors block" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+                        </a></li>
+                        <li><a href="#" class="hover:text-acid-lime transition-colors block" aria-label="X">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/></svg>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-platinum/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-platinum/40">
+                <p>&copy; 2026 VEYRiX. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-platinum">Privacy</a>
+                    <a href="#" class="hover:text-platinum">Terms</a>
+                    <a href="#" class="hover:text-platinum">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="fixed bottom-8 right-8 bg-acid-lime text-obsidian p-3 rounded-full shadow-lg shadow-acid-lime/20 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none z-50 hover:bg-white focus:outline-none" aria-label="Back to top">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50 });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
