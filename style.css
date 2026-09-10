@@ -96,6 +96,27 @@ html.light .logo-text {
     color: #111827;
 }
 
+/* ── Mobile/Tablet side menu: light mode fixes ── */
+html.light .bg-obsidian\/95 {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(16px);
+}
+html.light #mobileMenu {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+html.light #mobileMenu a,
+html.light #mobileMenu button {
+    color: #111827;
+}
+html.light #mobileMenu a:hover,
+html.light #mobileMenu button:hover {
+    color: #15803d;
+}
+html.light #mobileMenu a.active-link {
+    color: #15803d;
+}
+
 html.light .from-obsidian {
     --tw-gradient-from: #F9FAFB var(--tw-gradient-from-position);
     --tw-gradient-to: rgba(249, 250, 251, 0) var(--tw-gradient-to-position);
@@ -117,13 +138,19 @@ html.light .bg-obsidian\/30 {
 html.light .bg-\[\#05070A\] {
     background-color: #F3F4F6;
 }
+html.light .bg-\[\#05070A\] .text-acid-lime {
+    color: #15803d;
+    font-weight: 700;
+    text-shadow: none;
+}
 html.light .bg-\[\#0A0D14\] {
     background-color: #FFFFFF;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 html.light .bg-\[\#0A0D14\] .text-acid-lime {
-    color: #059669;
+    color: #15803d;
     font-weight: 700;
+    text-shadow: none;
 }
 html.light .from-\[\#0A0D14\] {
     --tw-gradient-from: #FFFFFF var(--tw-gradient-from-position);
@@ -246,4 +273,29 @@ html.light .nav-item.active-link {
 }
 html.light .nav-item.active-link::after {
     background-color: #10B981;
+}
+
+/* ── Acid-Lime glow: makes all yellow headings/numbers pop ── */
+.text-acid-lime {
+    text-shadow:
+        0 0 8px rgba(199, 243, 107, 0.85),
+        0 0 20px rgba(199, 243, 107, 0.55),
+        0 0 40px rgba(199, 243, 107, 0.30);
+}
+
+/* In light mode: dark accessible green replaces the invisible lime yellow */
+html.light .text-acid-lime {
+    color: #15803d;
+    text-shadow: none;
+}
+
+/* ── Light mode headings: deep black + crisp shadow = visual punch ── */
+html.light h1,
+html.light h2,
+html.light h3 {
+    color: #06080D;
+    font-size: 1.08em;
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.18),
+        0 2px 8px rgba(0, 0, 0, 0.08);
 }

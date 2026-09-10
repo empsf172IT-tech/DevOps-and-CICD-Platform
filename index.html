@@ -61,7 +61,7 @@
                 <span class="font-space font-bold text-2xl tracking-wider text-platinum logo-text">VEYRiX</span>
             </div>
             
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-platinum/80 nav-links">
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm tracking-wide text-platinum/80 nav-links">
                 <a href="#home" class="nav-item hover:text-acid-lime transition-colors">Home</a>
                 <a href="#platform" class="nav-item hover:text-acid-lime transition-colors">Platform</a>
                 <a href="#solutions" class="nav-item hover:text-acid-lime transition-colors">Solutions</a>
@@ -70,7 +70,7 @@
                 <a href="#observability" class="nav-item hover:text-acid-lime transition-colors">Observability</a>
             </div>
 
-            <div class="hidden md:flex items-center gap-6">
+            <div class="hidden lg:flex items-center gap-6">
                 <button id="themeToggle" class="text-platinum hover:text-acid-lime transition-colors" aria-label="Toggle Theme">
                     <i data-lucide="sun" class="w-5 h-5 hidden dark-icon"></i>
                     <i data-lucide="moon" class="w-5 h-5 light-icon"></i>
@@ -80,14 +80,14 @@
                 </a>
             </div>
 
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-platinum" id="mobileMenuBtn">
+            <!-- Mobile/Tablet Menu Button -->
+            <button class="lg:hidden text-platinum" id="mobileMenuBtn">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-obsidian/95 backdrop-blur-xl border-b border-platinum/10 p-6 flex-col gap-6">
+        <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-obsidian/95 backdrop-blur-xl border-b border-platinum/10 p-6 flex-col gap-6">
             <a href="#home" class="nav-item text-platinum hover:text-acid-lime font-medium">Home</a>
             <a href="#platform" class="nav-item text-platinum hover:text-acid-lime font-medium">Platform</a>
             <a href="#solutions" class="nav-item text-platinum hover:text-acid-lime font-medium">Solutions</a>
@@ -423,6 +423,66 @@
         </div>
     </section>
 
+    <!-- DevSecOps & Release Engineering (Combined slightly for flow) -->
+    <section id="security" class="py-24 bg-[#05070A] border-y border-platinum/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <!-- Security -->
+                <div data-aos="fade-up">
+                    <h2 class="text-3xl font-space font-bold mb-6">Security Is Part of the Pipeline.</h2>
+                    <p class="text-platinum/60 mb-8">Shift left without slowing down. Automated vulnerability scanning and policy enforcement built directly into the CI/CD flow.</p>
+                    
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
+                            <i data-lucide="shield-check" class="text-acid-lime w-5 h-5"></i>
+                            <div class="flex-1">SAST & DAST Scanning</div>
+                            <span class="text-acid-lime">PASS</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
+                            <i data-lucide="key" class="text-acid-lime w-5 h-5"></i>
+                            <div class="flex-1">Secret Detection</div>
+                            <span class="text-acid-lime">PASS</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
+                            <i data-lucide="container" class="text-acid-lime w-5 h-5"></i>
+                            <div class="flex-1">Container Vulnerability Scan</div>
+                            <span class="text-acid-lime">0 CRITICAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Release -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="text-3xl font-space font-bold mb-6">Deploy Boldly.<br>Roll Back Instantly.</h2>
+                    <p class="text-platinum/60 mb-8">Progressive delivery mechanisms that minimize blast radius. Canary releases and blue/green deployments out of the box.</p>
+                    
+                    <div class="glass-panel p-6 rounded border border-platinum/10">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="text-xs font-mono text-platinum/50">VERSION 4.8 ROLLOUT</div>
+                            <div class="text-xs font-mono text-acid-lime">HEALTH: STABLE</div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 text-right text-xs text-platinum/70">10%</div>
+                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden"><div class="h-full bg-acid-lime w-[10%]"></div></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 text-right text-xs text-platinum/70">25%</div>
+                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden"><div class="h-full bg-acid-lime w-[25%]"></div></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 text-right text-xs text-acid-lime font-bold">50%</div>
+                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden relative">
+                                    <div class="h-full bg-acid-lime w-[50%] shadow-[0_0_10px_#C7F36B]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Observability -->
     <section id="observability" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
@@ -486,66 +546,6 @@
         </div>
     </section>
 
-    <!-- DevSecOps & Release Engineering (Combined slightly for flow) -->
-    <section id="security" class="py-24 bg-[#05070A] border-y border-platinum/5 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20">
-                <!-- Security -->
-                <div data-aos="fade-up">
-                    <h2 class="text-3xl font-space font-bold mb-6">Security Is Part of the Pipeline.</h2>
-                    <p class="text-platinum/60 mb-8">Shift left without slowing down. Automated vulnerability scanning and policy enforcement built directly into the CI/CD flow.</p>
-                    
-                    <div class="space-y-4 font-mono text-sm">
-                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
-                            <i data-lucide="shield-check" class="text-acid-lime w-5 h-5"></i>
-                            <div class="flex-1">SAST & DAST Scanning</div>
-                            <span class="text-acid-lime">PASS</span>
-                        </div>
-                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
-                            <i data-lucide="key" class="text-acid-lime w-5 h-5"></i>
-                            <div class="flex-1">Secret Detection</div>
-                            <span class="text-acid-lime">PASS</span>
-                        </div>
-                        <div class="flex items-center gap-4 bg-obsidian p-4 rounded border border-platinum/10">
-                            <i data-lucide="container" class="text-acid-lime w-5 h-5"></i>
-                            <div class="flex-1">Container Vulnerability Scan</div>
-                            <span class="text-acid-lime">0 CRITICAL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Release -->
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <h2 class="text-3xl font-space font-bold mb-6">Deploy Boldly.<br>Roll Back Instantly.</h2>
-                    <p class="text-platinum/60 mb-8">Progressive delivery mechanisms that minimize blast radius. Canary releases and blue/green deployments out of the box.</p>
-                    
-                    <div class="glass-panel p-6 rounded border border-platinum/10">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="text-xs font-mono text-platinum/50">VERSION 4.8 ROLLOUT</div>
-                            <div class="text-xs font-mono text-acid-lime">HEALTH: STABLE</div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 text-right text-xs text-platinum/70">10%</div>
-                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden"><div class="h-full bg-acid-lime w-[10%]"></div></div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 text-right text-xs text-platinum/70">25%</div>
-                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden"><div class="h-full bg-acid-lime w-[25%]"></div></div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 text-right text-xs text-acid-lime font-bold">50%</div>
-                                <div class="flex-1 h-2 bg-platinum/10 rounded overflow-hidden relative">
-                                    <div class="h-full bg-acid-lime w-[50%] shadow-[0_0_10px_#C7F36B]"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Engineering Principles -->
     <section class="py-32 relative bg-obsidian">
         <div class="max-w-7xl mx-auto px-6">
@@ -553,22 +553,22 @@
             
             <div class="grid md:grid-cols-2 gap-x-16 gap-y-12">
                 <div data-aos="fade-up">
-                    <div class="text-acid-lime font-mono mb-4 text-sm">01</div>
+                    <div class="text-acid-lime font-mono mb-4 text-3xl font-bold tracking-widest">01</div>
                     <h3 class="text-2xl font-space font-bold mb-4">AUTOMATE EVERYTHING</h3>
                     <p class="text-platinum/60">Reduce repetitive operations. If it must be done more than twice, it must be automated into the pipeline.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-acid-lime font-mono mb-4 text-sm">02</div>
+                    <div class="text-acid-lime font-mono mb-4 text-3xl font-bold tracking-widest">02</div>
                     <h3 class="text-2xl font-space font-bold mb-4">RELIABILITY BY DESIGN</h3>
                     <p class="text-platinum/60">Build resilience into every system. Failures are expected; graceful degradation and rapid recovery are engineered.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-acid-lime font-mono mb-4 text-sm">03</div>
+                    <div class="text-acid-lime font-mono mb-4 text-3xl font-bold tracking-widest">03</div>
                     <h3 class="text-2xl font-space font-bold mb-4">SECURITY EVERYWHERE</h3>
                     <p class="text-platinum/60">Protect every stage of delivery. Security is not an afterthought, it is enforced at the infrastructure level.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-acid-lime font-mono mb-4 text-sm">04</div>
+                    <div class="text-acid-lime font-mono mb-4 text-3xl font-bold tracking-widest">04</div>
                     <h3 class="text-2xl font-space font-bold mb-4">OBSERVE EVERYTHING</h3>
                     <p class="text-platinum/60">Turn system signals into decisions. Visibility across the entire stack is mandatory for operational excellence.</p>
                 </div>
@@ -593,7 +593,7 @@
                 <a href="#contact" class="bg-acid-lime text-obsidian px-10 py-4 rounded-full font-bold text-lg hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_30px_rgba(199,243,107,0.2)] w-full sm:w-auto">
                     Talk to an Engineer
                 </a>
-                <a href="#demo" class="px-10 py-4 rounded-full font-bold text-lg border border-platinum/20 hover:border-acid-lime hover:text-acid-lime transition-all w-full sm:w-auto">
+                <a href="#demo" class="px-10 py-4 rounded-full font-bold text-lg border border-platinum/20 hover:bg-acid-lime hover:text-obsidian hover:border-acid-lime transition-all transform hover:-translate-y-1 w-full sm:w-auto">
                     Start Building
                 </a>
             </div>
