@@ -294,8 +294,44 @@ html.light h1,
 html.light h2,
 html.light h3 {
     color: #06080D;
-    font-size: 1.08em;
     text-shadow:
         0 1px 2px rgba(0, 0, 0, 0.18),
         0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ── CTA section: always dark regardless of theme ── */
+html.light #cta {
+    background-color: #07090D !important;
+}
+html.light #cta h1,
+html.light #cta h2,
+html.light #cta h3 {
+    color: #D9DEE7;
+    text-shadow: none;
+}
+html.light #cta .text-platinum\/50 {
+    color: rgba(217, 222, 231, 0.5) !important;
+}
+html.light #cta p {
+    color: rgba(217, 222, 231, 0.7);
+}
+/* dot-grid pattern */
+html.light #cta .opacity-10 {
+    opacity: 0.1;
+}
+/* gradient overlay stays dark */
+html.light #cta .from-obsidian {
+    --tw-gradient-from: #07090D var(--tw-gradient-from-position);
+    --tw-gradient-to: rgba(7, 9, 13, 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+/* "Start Building" outline button stays visible on dark bg */
+html.light #cta a[href="#demo"] {
+    color: #D9DEE7;
+    border-color: rgba(217, 222, 231, 0.25);
+}
+html.light #cta a[href="#demo"]:hover {
+    background-color: #C7F36B;
+    color: #07090D;
+    border-color: #C7F36B;
 }
