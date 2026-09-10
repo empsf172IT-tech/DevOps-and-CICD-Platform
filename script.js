@@ -65,6 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenu.classList.toggle('flex');
     });
 
+    // Close mobile menu on link click
+    const mobileNavLinks = mobileMenu.querySelectorAll('a.nav-item');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+    });
+
     // Number Counter Animation
     const counters = document.querySelectorAll('.counter');
     const speed = 200; // lower is faster
